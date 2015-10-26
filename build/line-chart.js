@@ -1,6 +1,6 @@
 
 /*
-line-chart - v1.1.12 - 25 September 2015
+line-chart - v1.1.12 - 26 October 2015
 https://github.com/n3-charts/line-chart
 Copyright (c) 2015 n3-charts
  */
@@ -1766,6 +1766,9 @@ mod.factory('n3utils', [
           text = v.x + ' : ' + v.y;
           if (options.tooltip.formatter) {
             text = options.tooltip.formatter(v.x, v.y, options.series[index], v.raw);
+          }
+          if (!text) {
+            item.attr('opacity', 0);
           }
           right = item.select('.rightTT');
           rText = right.select('text');

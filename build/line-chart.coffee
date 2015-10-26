@@ -1,5 +1,5 @@
 ###
-line-chart - v1.1.12 - 25 September 2015
+line-chart - v1.1.12 - 26 October 2015
 https://github.com/n3-charts/line-chart
 Copyright (c) 2015 n3-charts
 ###
@@ -160,7 +160,7 @@ directive('linechart', ['n3utils', '$window', '$timeout', (n3utils, $window, $ti
 
 # ----
 
-# /tmp/utils.coffee
+# C:/tmp/utils.coffee
 mod = angular.module('n3charts.utils', [])
 
 mod.factory('n3utils', ['$window', '$log', '$rootScope', ($window, $log, $rootScope) ->
@@ -1731,7 +1731,7 @@ mod.factory('n3utils', ['$window', '$log', '$rootScope', ($window, $log, $rootSc
         # Return min and max if index is out of bounds
         return values[0] if i is 0
         return values[values.length - 1] if i > values.length - 1
-        
+
         # get element before bisection
         d0 = values[i - 1]
 
@@ -1767,6 +1767,9 @@ mod.factory('n3utils', ['$window', '$log', '$rootScope', ($window, $log, $rootSc
           if options.tooltip.formatter
             text = options.tooltip.formatter(v.x, v.y, options.series[index], v.raw)
 
+          if !text
+            item.attr 'opacity', 0
+
           right = item.select('.rightTT')
           rText = right.select('text')
           rText.text(text)
@@ -1799,7 +1802,7 @@ mod.factory('n3utils', ['$window', '$log', '$rootScope', ($window, $log, $rootSc
           # Use a coloring function if defined, else use a color string value
           color = if angular.isFunction(series.color) \
             then series.color(v, series.values.indexOf(v)) else series.color
-          
+
           # Color the elements of the scrubber
           item.selectAll('circle').attr('stroke', color)
           item.selectAll('path').attr('fill', color)
