@@ -23,7 +23,7 @@
         # Return min and max if index is out of bounds
         return values[0] if i is 0
         return values[values.length - 1] if i > values.length - 1
-        
+
         # get element before bisection
         d0 = values[i - 1]
 
@@ -59,6 +59,9 @@
           if options.tooltip.formatter
             text = options.tooltip.formatter(v.x, v.y, options.series[index], v.raw)
 
+          if !text
+            item.attr 'opacity', 0
+
           right = item.select('.rightTT')
           rText = right.select('text')
           rText.text(text)
@@ -91,7 +94,7 @@
           # Use a coloring function if defined, else use a color string value
           color = if angular.isFunction(series.color) \
             then series.color(v, series.values.indexOf(v)) else series.color
-          
+
           # Color the elements of the scrubber
           item.selectAll('circle').attr('stroke', color)
           item.selectAll('path').attr('fill', color)
